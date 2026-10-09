@@ -6,6 +6,7 @@ A template for LLM-maintained wikis (the Karpathy "LLM Wiki" pattern) in Obsidia
 
 ```
 CLAUDE.md        shared schema: folders, page formats, ingest/query/lint workflows, log, Git rules
+.claude/skills/  /new-wiki, /ingest, /sync-starter (thin checklists that defer to CLAUDE.md)
 PURPOSE.md       per-wiki topic, scope and local rules (imported by CLAUDE.md; replace in each clone)
 raw/archive/     source documents; ingested sources move to archive/
 wiki/            INDEX.md plus concepts/, summaries/, scenarios/, syntheses/, qa/
@@ -14,19 +15,20 @@ outputs/         generated artifacts
 
 `wiki/log.md` and `wiki/maintenance-decisions.md` are not included. Claude creates them on the first operation.
 
-Ownership rule: **`CLAUDE.md`, `README.md` and the folder layout belong to the starter.** Everything a wiki needs to be about its own topic goes in `PURPOSE.md` and the wiki content. This keeps later merges conflict-free.
+Ownership rule: **`CLAUDE.md`, `README.md`, `.claude/skills/` and the folder layout belong to the starter.** Everything a wiki needs to be about its own topic goes in `PURPOSE.md` and the wiki content. This keeps later merges conflict-free.
 
 ## Create a new wiki
 
 1. `git clone path/to/wiki-starter my-topic-wiki`
 2. `cd my-topic-wiki`, then point the remotes: `git remote rename origin upstream`. Add your own `origin` if the wiki will have a remote.
-3. Edit `PURPOSE.md`: topic, audience, scope, extra rules.
-4. Open the folder as an Obsidian vault and start Claude Code in it. Check that Claude has read `PURPOSE.md` (the `@PURPOSE.md` import in `CLAUDE.md` should load it).
-5. Drop a source into `raw/` and ask Claude to ingest it. Commit when you approve the result, as `CLAUDE.md` describes.
+3. Open the folder as an Obsidian vault, start Claude Code in it and run `/new-wiki`. It fills in `PURPOSE.md` (topic, audience, scope, extra rules), writes the first log entry and checks that the `@PURPOSE.md` import loads.
+4. Drop a source into `raw/` and run `/ingest`. Commit when you approve the result, as `CLAUDE.md` describes.
 
 ## Keep the scaffolding up to date
 
 Run this in a wiki when the starter has changed. It is a `schema` operation under the Version control rules.
+
+Run `/sync-starter` in the wiki to do these steps with Claude, or follow them by hand.
 
 1. Check `git status` in the wiki. Commit or stash anything outstanding, so the merge starts from a clean checkpoint.
 2. `git fetch upstream`
@@ -39,7 +41,7 @@ Run this in a wiki when the starter has changed. It is a `schema` operation unde
 ## Improve the starter
 
 1. Make and test the schema change in a wiki where it came up.
-2. Copy the change into the starter's `CLAUDE.md`, keeping wiki-specific text out. Remove anything topic-specific.
+2. Copy the change into the starter's `CLAUDE.md` (and check that the skills in `.claude/skills/` still match it), keeping wiki-specific text out.
 3. Commit it in the starter with a clear message, e.g. `schema | Ingest step order`.
 4. Run the update steps above in the other wikis when you want the change.
 
