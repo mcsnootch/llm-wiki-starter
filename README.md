@@ -17,6 +17,16 @@ outputs/         generated artifacts
 
 Ownership rule: **`CLAUDE.md`, `README.md`, `.claude/skills/` and the folder layout belong to the starter.** Everything a wiki needs to be about its own topic goes in `PURPOSE.md` and the wiki content. This keeps later merges conflict-free.
 
+## Skills
+
+Skills live in `.claude/skills/`. Each is a thin checklist that defers to `CLAUDE.md` for the actual rules.
+
+| Skill | Use it to |
+| --- | --- |
+| `/new-wiki` | Set up a freshly cloned wiki: fills in `PURPOSE.md`, writes the first log entry and checks the `@PURPOSE.md` import loads. |
+| `/ingest` | Ingest new sources from `raw/` into the wiki, following the Ingest workflow, Index Structure and Version control rules. |
+| `/sync-starter` | Pull the latest shared scaffolding (`CLAUDE.md`, skills, folder layout) from the starter without touching wiki content. |
+
 ## Create a new wiki
 
 1. `git clone path/to/wiki-starter my-topic-wiki`
